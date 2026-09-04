@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow" />
+<title>LL Mechanical Services</title>
+<!--
+  GitHub Pages has no try_files, so a deep link like /contact never reaches index.html
+  and lands here instead. Encode the path into a query string and bounce to the root;
+  the decoder in index.html's <head> restores the real URL before the router reads it.
+
+  This is deliberately NOT a copy of index.html - a copy would have to be kept in sync
+  by hand forever, and one stale copy silently serves an old site to deep-linked visitors.
+-->
+<script>
+(function(){
+	var l = location;
+
+	// Guard: if this page is ever served for the root itself, bouncing would loop
+	// forever and grow the URL until the server rejects it.
+	if(l.pathname === '/' || l.search.indexOf('p=') !== -1){
+		return;
+	}
+
+	l.replace(l.origin + '/?p=' + encodeURIComponent(l.pathname.slice(1)) +
+		(l.search ? '&q=' + encodeURIComponent(l.search.slice(1)) : '') + l.hash);
+})();
+</script>
+</head>
+<body></body></html>
